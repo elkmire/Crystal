@@ -21,236 +21,443 @@
 
     </script>
     <style>
-        /* Base styles */
-        :root {
-            --bg-dark: #1a1a1a;
-            --bg-darker: #121212;
-            --turquoise: #40E0D0;
-            --burnt-orange: #CC5500;
-            --text-light: #ffffff;
-            --text-dim: #cccccc;
-        }
+/* Base variables */
+:root {
+    --bg-dark: #1a1a1a;
+    --bg-darker: #121212;
+    --turquoise: #40E0D0;
+    --burnt-orange: #CC5500;
+    --text-light: #ffffff;
+    --text-dim: #cccccc;
+}
 
-        @media print {
-            body {
-                background-color: white !important;
-                color: black !important;
-            }
-            
-            .input-section, .chart-section {
-                background: white !important;
-                border: 1px solid #ccc !important;
-                break-inside: avoid;
-                page-break-inside: avoid;
-            }
-            
-            .button-group, #loadBudgetFile {
-                display: none !important;
-            }
-            
-            .chart-container {
-                page-break-inside: avoid;
-                break-inside: avoid;
-                margin: 20px 0;
-            }
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
 
-            label {
-                color: black !important;
-            }
+h1 {
+    color: var(--turquoise);
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 2rem 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
 
-            input {
-                border: 1px solid #ccc !important;
-                background: white !important;
-                color: black !important;
-            }
+/* Layout */
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
 
-            h1 {
-                color: black !important;
-                text-align: center !important;
-                font-size: 2.5rem !important;
-                margin: 2rem 0 !important;
-                font-weight: bold !important;
-                text-transform: uppercase !important;
-                letter-spacing: 0.1em !important;
-            }
-            .breakdown-table {
-                color: black !important;
-            }
-            
-            .breakdown-table th,
-            .breakdown-table td {
-                border: 1px solid #ccc !important;
-            }
-            
-            .breakdown-table th {
-                background-color: #f0f0f0 !important;
-                color: black !important;
-            }
-            
-            .breakdown-table tr:nth-child(even) {
-                background-color: #f9f9f9 !important;
-            }
+@media (min-width: 769px) {
+    .container {
+        grid-template-columns: 1fr 2fr;
+    }
+}
 
-            @page {
-                size: A4;
-                margin: 2cm;
-            }
-        }
+/* Input and Chart Sections */
+.input-section {
+    background: var(--bg-darker);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--turquoise);
+    margin-bottom: 20px;
+}
 
+.chart-section {
+    background: var(--bg-darker);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--turquoise);
+    box-shadow: 0 0 10px rgba(64, 224, 208, 0.1);
+}
+
+/* Form Elements */
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--turquoise);
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid var(--turquoise);
+    border-radius: 4px;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--burnt-orange);
+}
+
+/* Buttons */
+button {
+    background: var(--turquoise);
+    color: var(--bg-dark);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: var(--burnt-orange);
+    color: var(--text-light);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.save-btn {
+    background: var(--burnt-orange);
+    color: var(--text-light);
+}
+
+.load-btn {
+    background: var(--turquoise);
+    color: var(--bg-dark);
+}
+
+/* Category and Bill Rows */
+#categoryInputs, 
+#billInputs {
+    margin-bottom: 15px;
+}
+
+.category-row, 
+.bill-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.category-row button, 
+.bill-row button {
+    background: var(--burnt-orange);
+    color: var(--text-light);
+}
+
+.category-row button:hover, 
+.bill-row button:hover {
+    background: #ff6b1a;
+}
+
+/* Charts and Tables */
+.chart-container {
+    margin-bottom: 30px;
+}
+
+.breakdown-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    color: var(--text-light);
+}
+
+.breakdown-table th,
+.breakdown-table td {
+    padding: 10px;
+    border: 1px solid var(--turquoise);
+    text-align: right;
+}
+
+.breakdown-table th {
+    background-color: var(--bg-darker);
+    color: var(--turquoise);
+    font-weight: bold;
+    text-align: center;
+}
+
+.breakdown-table tr:nth-child(even) {
+    background-color: rgba(64, 224, 208, 0.1);
+}
+
+/* Messages */
+.message {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    display: none;
+}
+
+.message.success {
+    display: block;
+    background: rgba(64, 224, 208, 0.1);
+    border: 1px solid var(--turquoise);
+    color: var(--turquoise);
+}
+
+.message.error {
+    display: block;
+    background: rgba(204, 85, 0, 0.1);
+    border: 1px solid var(--burnt-orange);
+    color: var(--burnt-orange);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 10px;
+    }
+    
+    body {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        margin: 1rem 0;
+    }
+    
+    .input-section, 
+    .chart-section {
+        padding: 15px;
+    }
+    
+    .category-row, 
+    .bill-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .button-group {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .button-group button {
+        flex: 1 1 150px;
+        margin: 5px;
+    }
+    
+    .breakdown-table {
+        font-size: 0.9rem;
+    }
+    
+    .breakdown-table th,
+    .breakdown-table td {
+        padding: 5px;
+    }
+}
+
+/* Small Screen Optimizations */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    .input-section, 
+    .chart-section {
+        padding: 10px;
+    }
+    
+    .chart-container {
+        margin-bottom: 20px;
+    }
+    
+    .breakdown-table {
+        font-size: 0.8rem;
+    }
+    
+    input {
+        padding: 6px;
+    }
+    
+    button {
+        padding: 8px 15px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 1.5cm;
+    }
+    
+    /* Reset all colors to monochrome */
+    * {
+        background-color: transparent !important;
+        color: black !important;
+        border-color: #000 !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+        print-color-adjust: economy !important;
+        -webkit-print-color-adjust: economy !important;
+    }
+    
+    /* Basic layout */
+    body {
+        margin: 0;
+        padding: 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        background: white !important;
+    }
+    
+    /* Container layout adjustments */
+    .container {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Header styling */
+    h1 {
+        font-size: 18pt !important;
+        margin: 0 0 15px 0 !important;
+        padding-bottom: 10px !important;
+        border-bottom: 1px solid #000 !important;
+    }
+    
+    /* Input section styling */
+    .input-section {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin: 0 0 20px 0 !important;
+        padding: 15px !important;
+        border: 1px solid #000 !important;
+        border-radius: 0 !important;
+    }
+    
+    /* User info section */
+    .input-group {
+        margin-bottom: 10px !important;
+    }
+    
+    /* Labels and inputs */
+    label {
+        font-weight: bold !important;
+        margin-bottom: 3px !important;
+    }
+    
+    input {
+        border: none !important;
+        border-bottom: 1px solid #000 !important;
+        padding: 2px 0 !important;
+        margin-bottom: 8px !important;
+    }
+    
+    /* Chart section adjustments */
+    .chart-section {
+        page-break-before: always !important;
+        break-before: always !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+    }
+    
+    /* Chart containers */
+    .chart-container {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin: 20px 0 !important;
+        height: 350px !important; /* Fixed height for consistent chart size */
+    }
+    
+    /* Canvas elements (charts) */
+    canvas {
+        max-width: 100% !important;
+        height: 100% !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+    
+    /* Table styling */
+    .breakdown-table {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        width: 100% !important;
+        margin: 20px 0 !important;
+        border: 1px solid #000 !important;
+    }
+    
+    .breakdown-table th,
+    .breakdown-table td {
+        padding: 6px 8px !important;
+        border: 1px solid #000 !important;
+        text-align: right !important;
+        font-size: 10pt !important;
+    }
+    
+    .breakdown-table th {
+        background: white !important;
+        font-weight: bold !important;
+        text-align: center !important;
+    }
+    
+    .breakdown-table tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+    
+    /* Hide interactive elements */
+    .button-group,
+    #loadBudgetFile,
+    button,
+    .message,
+    .category-row button,
+    .bill-row button {
+        display: none !important;
+    }
+    
+    /* Ensure proper page breaks */
+    .chart-section::before {
+        content: '';
+        display: block;
+        height: 10px;
+        margin-top: 10px;
+    }
+    
+    /* Print-specific content adjustments */
+    @media print and (max-width: 480px) {
         body {
-            font-family: Arial, sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
+            font-size: 9pt !important;
         }
-
+        
         h1 {
-            color: var(--turquoise);
-            text-align: center;
-            font-size: 2.5rem;
-            margin: 2rem 0;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 14pt !important;
         }
-
-        .container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                grid-template-columns: 1fr 2fr;
-            }
-        }
-
-        .input-section {
-            background: var(--bg-darker);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--turquoise);
-        }
-        .chart-section {
-            background: var(--bg-darker);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--turquoise);
-            box-shadow: 0 0 10px rgba(64, 224, 208, 0.1);
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: var(--turquoise);
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid var(--turquoise);
-            border-radius: 4px;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-        }
-        input:focus {
-            outline: none;
-            border-color: var(--burnt-orange);
-        }
-        button {
-            background: var(--turquoise);
-            color: var(--bg-dark);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        button:hover {
-            background: var(--burnt-orange);
-            color: var(--text-light);
-        }
-        #categoryInputs, #billInputs {
-            margin-bottom: 15px;
-        }
-        .category-row, .bill-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-        .category-row button, .bill-row button {
-            background: var(--burnt-orange);
-            color: var(--text-light);
-        }
-        .category-row button:hover, .bill-row button:hover {
-            background: #ff6b1a;
-        }
+        
         .chart-container {
-            margin-bottom: 30px;
+            height: 300px !important;
         }
-        .breakdown-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            color: var(--text-light);
-        }
-
+        
         .breakdown-table th,
         .breakdown-table td {
-            padding: 10px;
-            border: 1px solid var(--turquoise);
-            text-align: right;
+            padding: 4px 6px !important;
+            font-size: 8pt !important;
         }
-
-        .breakdown-table th {
-            background-color: var(--bg-darker);
-            color: var(--turquoise);
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .breakdown-table tr:nth-child(even) {
-            background-color: rgba(64, 224, 208, 0.1);
-        }
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .save-btn {
-            background: var(--burnt-orange);
-            color: var(--text-light);
-        }
-        .load-btn {
-            background: var(--turquoise);
-            color: var(--bg-dark);
-        }
-        .message {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 4px;
-            display: none;
-        }
-        .message.success {
-            display: block;
-            background: rgba(64, 224, 208, 0.1);
-            border: 1px solid var(--turquoise);
-            color: var(--turquoise);
-        }
-        .message.error {
-            display: block;
-            background: rgba(204, 85, 0, 0.1);
-            border: 1px solid var(--burnt-orange);
-            color: var(--burnt-orange);
-        }
+    }
+}
+}
     </style>
 </head>
 <body>
@@ -284,7 +491,7 @@
             <div class="button-group">
                 <button onclick="calculateAndUpdate()">Calculate</button>
                 <button onclick="saveBudgetToFile()" class="save-btn">Save to File</button>
-                <input type="file" id="loadBudgetFile" accept=".json" style="display: none;" onchange="loadBudgetFromFile(this)">
+                <input type="file" id="loadBudgetFile" accept=".txt" style="display: none;" onchange="loadBudgetFromFile(this)">
                 <button onclick="document.getElementById('loadBudgetFile').click()" class="load-btn">Load from File</button>
                 <button onclick="window.print()" class="print-button">Print Budget</button>
             </div>
@@ -580,13 +787,26 @@
             }))
         };
 
-        const dataStr = JSON.stringify(budgetData, null, 2);
-        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        // Format budget data as readable text
+        let textContent = `Budget for ${userName}\n\n`;
+        textContent += `Monthly Income: $${budgetData.income}\n\n`;
+        
+        textContent += `Monthly Bills:\n`;
+        budgetData.bills.forEach(bill => {
+            textContent += `${bill.name}: $${bill.amount}\n`;
+        });
+        
+        textContent += `\nBudget Categories:\n`;
+        budgetData.categories.forEach(category => {
+            textContent += `${category.name}: $${category.amount}\n`;
+        });
+
+        const dataBlob = new Blob([textContent], { type: 'text/plain' });
         const url = URL.createObjectURL(dataBlob);
         
         const downloadLink = document.createElement('a');
         downloadLink.href = url;
-        downloadLink.download = `${userName}.json`;
+        downloadLink.download = `${userName}_budget.txt`;
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
@@ -610,7 +830,56 @@ function loadBudgetFromFile(input) {
         const reader = new FileReader();
         reader.onload = function(e) {
             try {
-                const budgetData = JSON.parse(e.target.result);
+                const text = e.target.result;
+                const lines = text.split('\n').map(line => line.trim());
+                
+                // Parse the text file
+                let budgetData = {
+                    name: '',
+                    income: 0,
+                    bills: [],
+                    categories: []
+                };
+
+                // Parse name from "Budget for [name]"
+                const nameMatch = lines[0].match(/Budget for (.+)/);
+                if (nameMatch) {
+                    budgetData.name = nameMatch[1];
+                }
+
+                // Parse income
+                const incomeLine = lines.find(line => line.startsWith('Monthly Income:'));
+                if (incomeLine) {
+                    budgetData.income = parseFloat(incomeLine.split('$')[1]) || 0;
+                }
+
+                // Parse bills
+                let isBillSection = false;
+                let isCategorySection = false;
+
+                lines.forEach(line => {
+                    if (line === 'Monthly Bills:') {
+                        isBillSection = true;
+                        isCategorySection = false;
+                        return;
+                    }
+                    if (line === 'Budget Categories:') {
+                        isBillSection = false;
+                        isCategorySection = true;
+                        return;
+                    }
+
+                    if (line && line.includes(':') && line !== 'Monthly Bills:' && line !== 'Budget Categories:') {
+                        const [name, amountStr] = line.split(':').map(s => s.trim());
+                        const amount = parseFloat(amountStr.replace('$', '')) || 0;
+
+                        if (isBillSection) {
+                            budgetData.bills.push({ name, amount });
+                        } else if (isCategorySection) {
+                            budgetData.categories.push({ name, amount });
+                        }
+                    }
+                });
 
                 // Set name if it exists in the file
                 if (budgetData.name) {
