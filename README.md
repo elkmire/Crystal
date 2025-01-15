@@ -1,4 +1,4 @@
-# [Dynamic Budget](https://elkmire.github.io/DynamicBudget/)
+# [Crystal Budget](https://elkmire.github.io/DynamicBudget/)
 
 Effective budgeting serves as the foundation for financial stability and long-term wealth building. By tracking income and expenses systematically, individuals can make informed decisions about their spending habits, identify areas for potential savings, and work toward meaningful financial goals.
 
