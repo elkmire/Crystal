@@ -21,449 +21,457 @@
 
     </script>
     <style>
-/* Base variables */
-:root {
-    --bg-dark: #1a1a1a;
-    --bg-darker: #121212;
-    --turquoise: #40E0D0;
-    --burnt-orange: #CC5500;
-    --text-light: #ffffff;
-    --text-dim: #cccccc;
-}
-
-/* Base styles */
-body {
-    font-family: Arial, sans-serif;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-}
-
-h1 {
-    color: var(--turquoise);
-    text-align: center;
-    font-size: 2.5rem;
-    margin: 2rem 0;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Layout */
-.container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
-
-@media (min-width: 769px) {
-    .container {
-        grid-template-columns: 1fr 2fr;
-    }
-}
-
-/* Input and Chart Sections */
-.input-section {
-    background: var(--bg-darker);
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid var(--turquoise);
-    margin-bottom: 20px;
-}
-
-.chart-section {
-    background: var(--bg-darker);
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid var(--turquoise);
-    box-shadow: 0 0 10px rgba(64, 224, 208, 0.1);
-}
-
-/* Form Elements */
-.input-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: var(--turquoise);
-}
-
-input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid var(--turquoise);
-    border-radius: 4px;
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-}
-
-input:focus {
-    outline: none;
-    border-color: var(--burnt-orange);
-}
-
-/* Buttons */
-button {
-    background: var(--turquoise);
-    color: var(--bg-dark);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-button:hover {
-    background: var(--burnt-orange);
-    color: var(--text-light);
-}
-
-.button-group {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.save-btn {
-    background: var(--burnt-orange);
-    color: var(--text-light);
-}
-
-.load-btn {
-    background: var(--turquoise);
-    color: var(--bg-dark);
-}
-
-/* Category and Bill Rows */
-#categoryInputs, 
-#billInputs {
-    margin-bottom: 15px;
-}
-
-.category-row, 
-.bill-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.category-row button, 
-.bill-row button {
-    background: var(--burnt-orange);
-    color: var(--text-light);
-}
-
-.category-row button:hover, 
-.bill-row button:hover {
-    background: #ff6b1a;
-}
-
-/* Charts and Tables */
-.chart-container {
-    margin-bottom: 30px;
-}
-
-.breakdown-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    color: var(--text-light);
-}
-
-.breakdown-table th,
-.breakdown-table td {
-    padding: 10px;
-    border: 1px solid var(--turquoise);
-    text-align: right;
-}
-
-.breakdown-table th {
-    background-color: var(--bg-darker);
-    color: var(--turquoise);
-    font-weight: bold;
-    text-align: center;
-}
-
-.breakdown-table tr:nth-child(even) {
-    background-color: rgba(64, 224, 208, 0.1);
-}
-
-/* Messages */
-.message {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 4px;
-    display: none;
-}
-
-.message.success {
-    display: block;
-    background: rgba(64, 224, 208, 0.1);
-    border: 1px solid var(--turquoise);
-    color: var(--turquoise);
-}
-
-.message.error {
-    display: block;
-    background: rgba(204, 85, 0, 0.1);
-    border: 1px solid var(--burnt-orange);
-    color: var(--burnt-orange);
-}
-
-/* Mobile Responsive Styles */
-@media (max-width: 768px) {
-    .container {
-        grid-template-columns: 1fr;
-        gap: 15px;
-        padding: 10px;
-    }
-    
-    body {
-        padding: 10px;
-    }
-    
-    h1 {
-        font-size: 2rem;
-        margin: 1rem 0;
-    }
-    
-    .input-section, 
-    .chart-section {
-        padding: 15px;
-    }
-    
-    .category-row, 
-    .bill-row {
-        flex-direction: column;
-        gap: 5px;
-    }
-    
-    .button-group {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .button-group button {
-        flex: 1 1 150px;
-        margin: 5px;
-    }
-    
-    .breakdown-table {
-        font-size: 0.9rem;
-    }
-    
-    .breakdown-table th,
-    .breakdown-table td {
-        padding: 5px;
-    }
-}
-
-/* Small Screen Optimizations */
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.75rem;
-    }
-    
-    .input-section, 
-    .chart-section {
-        padding: 10px;
-    }
-    
-    .chart-container {
-        margin-bottom: 20px;
-    }
-    
-    .breakdown-table {
-        font-size: 0.8rem;
-    }
-    
-    input {
-        padding: 6px;
-    }
-    
-    button {
-        padding: 8px 15px;
-    }
-}
-
-/* Print Styles */
-@media print {
-    @page {
-        size: A4 portrait;
-        margin: 1.5cm;
-    }
-    
-    /* Reset all colors to monochrome */
-    * {
-        background-color: transparent !important;
-        color: black !important;
-        border-color: #000 !important;
-        text-shadow: none !important;
-        box-shadow: none !important;
-        print-color-adjust: economy !important;
-        -webkit-print-color-adjust: economy !important;
-    }
-    
-    /* Basic layout */
-    body {
-        margin: 0;
-        padding: 0;
-        font-size: 11pt;
-        line-height: 1.3;
-        background: white !important;
-    }
-    
-    /* Container layout adjustments */
-    .container {
-        display: block !important;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    
-    /* Header styling */
-    h1 {
-        font-size: 18pt !important;
-        margin: 0 0 15px 0 !important;
-        padding-bottom: 10px !important;
-        border-bottom: 1px solid #000 !important;
-    }
-    
-    /* Input section styling */
-    .input-section {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-        margin: 0 0 20px 0 !important;
-        padding: 15px !important;
-        border: 1px solid #000 !important;
-        border-radius: 0 !important;
-    }
-    
-    /* User info section */
-    .input-group {
-        margin-bottom: 10px !important;
-    }
-    
-    /* Labels and inputs */
-    label {
-        font-weight: bold !important;
-        margin-bottom: 3px !important;
-    }
-    
-    input {
-        border: none !important;
-        border-bottom: 1px solid #000 !important;
-        padding: 2px 0 !important;
-        margin-bottom: 8px !important;
-    }
-    
-    /* Chart section adjustments */
-    .chart-section {
-        page-break-before: always !important;
-        break-before: always !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        border: none !important;
-    }
-    
-    /* Chart containers */
-    .chart-container {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-        margin: 20px 0 !important;
-        height: 350px !important; /* Fixed height for consistent chart size */
-    }
-    
-    /* Canvas elements (charts) */
-    canvas {
-        max-width: 100% !important;
-        height: 100% !important;
-        margin: 0 auto !important;
-        display: block !important;
-    }
-    
-    /* Table styling */
-    .breakdown-table {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-        width: 100% !important;
-        margin: 20px 0 !important;
-        border: 1px solid #000 !important;
-    }
-    
-    .breakdown-table th,
-    .breakdown-table td {
-        padding: 6px 8px !important;
-        border: 1px solid #000 !important;
-        text-align: right !important;
-        font-size: 10pt !important;
-    }
-    
-    .breakdown-table th {
-        background: white !important;
-        font-weight: bold !important;
-        text-align: center !important;
-    }
-    
-    .breakdown-table tr {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-    }
-    
-    /* Hide interactive elements */
-    .button-group,
-    #loadBudgetFile,
-    button,
-    .message,
-    .category-row button,
-    .bill-row button {
-        display: none !important;
-    }
-    
-    /* Ensure proper page breaks */
-    .chart-section::before {
-        content: '';
-        display: block;
-        height: 10px;
-        margin-top: 10px;
-    }
-    
-    /* Print-specific content adjustments */
-    @media print and (max-width: 480px) {
+        /* Base variables */
+        :root {
+            --bg-dark: #1a1a1a;
+            --bg-darker: #121212;
+            --turquoise: #40E0D0;
+            --burnt-orange: #CC5500;
+            --text-light: #ffffff;
+            --text-dim: #cccccc;
+        }
+        
+        /* Base styles */
         body {
-            font-size: 9pt !important;
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
         }
         
         h1 {
-            font-size: 14pt !important;
+            color: var(--turquoise);
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 2rem 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
         
+        /* Layout */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        @media (min-width: 769px) {
+            .container {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+        
+        /* Input and Chart Sections */
+        .input-section {
+            background: var(--bg-darker);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--turquoise);
+            margin-bottom: 20px;
+        }
+        
+        .chart-section {
+            background: var(--bg-darker);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--turquoise);
+            box-shadow: 0 0 10px rgba(64, 224, 208, 0.1);
+        }
+        
+        /* Form Elements */
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--turquoise);
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid var(--turquoise);
+            border-radius: 4px;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--burnt-orange);
+        }
+        
+        /* Buttons */
+        button {
+            background: var(--turquoise);
+            color: var(--bg-dark);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: var(--burnt-orange);
+            color: var(--text-light);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .save-btn {
+            background: var(--burnt-orange);
+            color: var(--text-light);
+        }
+        
+        .load-btn {
+            background: var(--turquoise);
+            color: var(--bg-dark);
+        }
+        
+        /* Category and Bill Rows */
+        #categoryInputs, 
+        #billInputs {
+            margin-bottom: 15px;
+        }
+        
+        .category-row, 
+        .bill-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .category-row button, 
+        .bill-row button {
+            background: var(--burnt-orange);
+            color: var(--text-light);
+        }
+        
+        .category-row button:hover, 
+        .bill-row button:hover {
+            background: #ff6b1a;
+        }
+        
+        /* Charts and Tables */
         .chart-container {
-            height: 300px !important;
+            margin-bottom: 30px;
+        }
+        
+        .breakdown-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            color: var(--text-light);
         }
         
         .breakdown-table th,
         .breakdown-table td {
-            padding: 4px 6px !important;
-            font-size: 8pt !important;
+            padding: 10px;
+            border: 1px solid var(--turquoise);
+            text-align: right;
         }
-    }
-}
-}
-    </style>
+        
+        .breakdown-table th {
+            background-color: var(--bg-darker);
+            color: var(--turquoise);
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .breakdown-table tr:nth-child(even) {
+            background-color: rgba(64, 224, 208, 0.1);
+        }
+        
+        /* Messages */
+        .message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .message.success {
+            display: block;
+            background: rgba(64, 224, 208, 0.1);
+            border: 1px solid var(--turquoise);
+            color: var(--turquoise);
+        }
+        
+        .message.error {
+            display: block;
+            background: rgba(204, 85, 0, 0.1);
+            border: 1px solid var(--burnt-orange);
+            color: var(--burnt-orange);
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 10px;
+            }
+            
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                margin: 1rem 0;
+            }
+            
+            .input-section, 
+            .chart-section {
+                padding: 15px;
+            }
+            
+            .category-row, 
+            .bill-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .button-group {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .button-group button {
+                flex: 1 1 150px;
+                margin: 5px;
+            }
+            
+            .breakdown-table {
+                font-size: 0.9rem;
+            }
+            
+            .breakdown-table th,
+            .breakdown-table td {
+                padding: 5px;
+            }
+        }
+        
+        /* Small Screen Optimizations */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            .input-section, 
+            .chart-section {
+                padding: 10px;
+            }
+            
+            .chart-container {
+                margin-bottom: 20px;
+            }
+            
+            .breakdown-table {
+                font-size: 0.8rem;
+            }
+            
+            input {
+                padding: 6px;
+            }
+            
+            button {
+                padding: 8px 15px;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 1.5cm;
+            }
+            
+            /* Reset all colors to monochrome */
+            * {
+                background-color: transparent !important;
+                color: black !important;
+                border-color: #000 !important;
+                text-shadow: none !important;
+                box-shadow: none !important;
+                print-color-adjust: economy !important;
+                -webkit-print-color-adjust: economy !important;
+            }
+            
+            /* Basic layout */
+            body {
+                margin: 0;
+                padding: 0;
+                font-size: 11pt;
+                line-height: 1.3;
+                background: white !important;
+            }
+            
+            /* Container layout adjustments */
+            .container {
+                display: block !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            /* Header styling */
+            h1 {
+                font-size: 18pt !important;
+                margin: 0 0 5px 0 !important;
+                padding-bottom: 0 !important;
+            }
+            
+            /* Developer credit styling for print */
+            h1 + div {
+                font-size: 10pt !important;
+                margin: 0 0 15px 0 !important;
+                padding-bottom: 10px !important;
+                border-bottom: 1px solid #000 !important;
+                text-align: center !important;
+                color: #666 !important;
+            }
+            
+            /* Input section styling */
+            .input-section {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                margin: 0 0 20px 0 !important;
+                padding: 15px !important;
+                border: 1px solid #000 !important;
+                border-radius: 0 !important;
+            }
+            
+            /* User info section */
+            .input-group {
+                margin-bottom: 10px !important;
+            }
+            
+            /* Labels and inputs */
+            label {
+                font-weight: bold !important;
+                margin-bottom: 3px !important;
+            }
+            
+            input {
+                border: none !important;
+                border-bottom: 1px solid #000 !important;
+                padding: 2px 0 !important;
+                margin-bottom: 8px !important;
+            }
+            
+            /* Chart section adjustments */
+            .chart-section {
+                page-break-before: always !important;
+                break-before: always !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+            }
+            
+            /* Chart containers */
+            .chart-container {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                margin: 20px 0 !important;
+                height: 350px !important;
+            }
+            
+            /* Canvas elements (charts) */
+            canvas {
+                max-width: 100% !important;
+                height: 100% !important;
+                margin: 0 auto !important;
+                display: block !important;
+            }
+            
+            /* Table styling */
+            .breakdown-table {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                width: 100% !important;
+                margin: 20px 0 !important;
+                border: 1px solid #000 !important;
+            }
+            
+            .breakdown-table th,
+            .breakdown-table td {
+                padding: 6px 8px !important;
+                border: 1px solid #000 !important;
+                text-align: right !important;
+                font-size: 10pt !important;
+            }
+            
+            .breakdown-table th {
+                background: white !important;
+                font-weight: bold !important;
+                text-align: center !important;
+            }
+            
+            .breakdown-table tr {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* Hide interactive elements */
+            .button-group,
+            #loadBudgetFile,
+            button,
+            .message,
+            .category-row button,
+            .bill-row button {
+                display: none !important;
+            }
+            
+            /* Ensure proper page breaks */
+            .chart-section::before {
+                content: '';
+                display: block;
+                height: 10px;
+                margin-top: 10px;
+            }
+            
+            /* Print-specific content adjustments */
+            @media print and (max-width: 480px) {
+                body {
+                    font-size: 9pt !important;
+                }
+                
+                h1 {
+                    font-size: 14pt !important;
+                }
+                
+                .chart-container {
+                    height: 300px !important;
+                }
+                
+                .breakdown-table th,
+                .breakdown-table td {
+                    padding: 4px 6px !important;
+                    font-size: 8pt !important;
+                }
+            }
+        }
+            </style>
 </head>
 <body>
     <h1>Crystal Budget</h1>
+    <div style="text-align: center; color: var(--text-dim); margin-top: -1.5rem; margin-bottom: 2rem;">developed by elkmire</div>
     <div class="input-section" style="margin-bottom: 20px;">
-    <div class="input-group">
         <label for="userName">Name</label>
         <input type="text" id="userName" placeholder="Enter Name">
     </div>
